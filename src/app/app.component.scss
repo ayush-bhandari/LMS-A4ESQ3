@@ -1,0 +1,35 @@
+.example-container {
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+}
+
+.example-sidenav {
+  /*display: flex;*/
+
+  display: inline-block;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  width: 200px;
+  background-color: #FFD641;
+}
+
+.example-header {
+  position: fixed;
+  top: 0;
+  left: 200px;
+  right: 0;
+}
+.toolbar_image{
+    
+    height: 60px;
+    width: 200px;
+}
+.copyright-text{
+    color: red;
+}
+.sidenav_button{
+  width: 200px;
+}

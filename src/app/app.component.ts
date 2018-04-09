@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-declare let electron: any;
+// declare let electron: any;
 
 @Component({
   selector: 'app-root',
@@ -8,13 +8,14 @@ declare let electron: any;
 })
 export class AppComponent {
 
-  // public title = 'my app';
+  public imgLogoUrl = 'assets/lims.png';
   // public ipc = electron.ipcRenderer;
   // public list: Array<string>;
 
-  constructor(private ref: ChangeDetectorRef) { }
+  // constructor(private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+
     // let me = this;
     // me.ipc.send("mainWindowLoaded")
     // me.ipc.on("resultSent", function (evt, result) {

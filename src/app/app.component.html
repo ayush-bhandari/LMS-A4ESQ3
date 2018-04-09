@@ -1,3 +1,19 @@
-<div style="text-align:center">
-  <h1>LIMS</h1>
-</div>
+<ng-container>
+<mat-toolbar color="accent" class="example-header"><h1>WELCOME TO LIBRARY MANAGEMENT SYSTEM</h1></mat-toolbar>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav"
+                 [fixedInViewport]="true" [fixedTopGap]="0"
+                 [fixedBottomGap]="0">
+
+    	<img routerLink="/dashboard" class="toolbar_image" [src]="imgLogoUrl"/>
+<p class="copyright-text">Powered by <a href="http://hashmake.com.np" target="_blank">Hash Make</a></p>
+    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/dashboard">DASHBOARD</button>
+    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/books">BOOKS</button>
+    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/students">STUDENTS</button>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

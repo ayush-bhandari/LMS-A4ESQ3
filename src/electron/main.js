@@ -9,12 +9,13 @@ let knex = require("knex")({
   client: "sqlite3",
   connection: {
     filename: path.join(__dirname, '../DB/', 'database.sqlite')
-  }
+  },
+  useNullAsDefault: true
 });
 
 function createWindow() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({ width: 800, height: 600, icon:__dirname+'../assets/lims.png', show: false })
+  mainWindow = new BrowserWindow({ width: 800, height: 600, icon:__dirname+'/assets/lims.png', show: false })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -29,10 +30,10 @@ function createWindow() {
   // mainWindow.webContents.openDevTools()
 
   // ipcMain.on("mainWindowLoaded", function () {
-  //   let result = knex.select("FirstName").from("Users")
-  //   result.then(function (rows) {
-  //     mainWindow.webContents.send("resultSent", rows);
-  //   })
+  //   // let result = knex.select("FirstName").from("Users")
+  //   // result.then(function (rows) {
+  //   //   mainWindow.webContents.send("resultSent", rows);
+  //   // })
   // });
 
   // Emitted when the window is closed.
