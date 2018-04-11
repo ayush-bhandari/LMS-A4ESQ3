@@ -1,3 +1,59 @@
-<p>
-  students works!
-</p>
+<div class="student-container mat-elevation-z8">
+
+	<div class="student-header">
+		<button mat-raised-button color="accent">ADD NEW STUDENT</button>
+	    <mat-form-field>
+	      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Seach...">
+	    </mat-form-field>
+
+    </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{student.id}} </mat-cell>
+    </ng-container>
+
+	<ng-container matColumnDef="member_id">
+      <mat-header-cell *matHeaderCellDef> Member ID </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{student.member_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="student_name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{student.student_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="student_class">
+      <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{student.student_class}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="student_rollno">
+      <mat-header-cell *matHeaderCellDef> Roll no </mat-header-cell>
+      <mat-cell *matCellDef="let student"> {{student.student_rollno}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit_delete">
+      	<mat-header-cell *matHeaderCellDef> Edit / Delete </mat-header-cell>
+      	<mat-cell *matCellDef="let student">
+       		<button mat-icon-button color="accent">
+    			<mat-icon>mode_edit</mat-icon>
+  			</button>/<button mat-icon-button color="accent">
+    			<mat-icon>delete_forever</mat-icon>
+  			</button>
+   		</mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

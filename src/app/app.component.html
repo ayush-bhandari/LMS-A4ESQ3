@@ -1,19 +1,22 @@
 <ng-container>
-<mat-toolbar color="accent" class="example-header"><h1>WELCOME TO LIBRARY MANAGEMENT SYSTEM</h1></mat-toolbar>
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav"
+<mat-toolbar color="primary" class="main-header"><h1>WELCOME TO LIBRARY MANAGEMENT SYSTEM</h1></mat-toolbar>
+<mat-sidenav-container class="main-container">
+    <mat-sidenav #sidenav mode="side" opened="true" class="main-sidenav"
                  [fixedInViewport]="true" [fixedTopGap]="0"
                  [fixedBottomGap]="0">
 
     	<img routerLink="/dashboard" class="toolbar_image" [src]="imgLogoUrl"/>
-<p class="copyright-text">Powered by <a href="http://hashmake.com.np" target="_blank">Hash Make</a></p>
-    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/dashboard">DASHBOARD</button>
-    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/books">BOOKS</button>
-    	<button mat-raised-button color="primary" class="sidenav_button" routerLink="/students">STUDENTS</button>
+
+    	<button mat-raised-button color="accent" class="sidenav_button" routerLink="/dashboard">DASHBOARD</button>
+    	<button mat-raised-button color="accent" class="sidenav_button" routerLink="/books">BOOKS</button>
+    	<button mat-raised-button color="accent" class="sidenav_button" routerLink="/students">STUDENTS</button>
+   
     </mat-sidenav>
 
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
+  <mat-toolbar class="main-footer"><p class="copyright-text">Powered by <a href="http://hashmake.com.np" target="_blank"><img class="footer_image" [src]="footerLogoUrl"></a></p></mat-toolbar>
 </ng-container>

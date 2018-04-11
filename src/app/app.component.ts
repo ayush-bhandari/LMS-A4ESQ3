@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-// declare let electron: any;
 
 @Component({
   selector: 'app-root',
@@ -9,22 +8,10 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 export class AppComponent {
 
   public imgLogoUrl = 'assets/lims.png';
-  // public ipc = electron.ipcRenderer;
-  // public list: Array<string>;
-
-  // constructor(private ref: ChangeDetectorRef) { }
+  public footerLogoUrl = 'assets/hm.png';
 
   ngOnInit() {
 
-    // let me = this;
-    // me.ipc.send("mainWindowLoaded")
-    // me.ipc.on("resultSent", function (evt, result) {
-    //   me.list = [];
-    //   for (var i = 0; i < result.length; i++) {
-    //     me.list.push(result[i].FirstName.toString());
-    //   }
-    //   me.ref.detectChanges()
-    // });
 
   }
 }

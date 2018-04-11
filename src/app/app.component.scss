@@ -1,4 +1,4 @@
-.example-container {
+.main-container {
   position: absolute;
   top: 60px;
   bottom: 60px;
@@ -6,17 +6,19 @@
   right: 0;
 }
 
-.example-sidenav {
+.main-sidenav {
   /*display: flex;*/
 
   display: inline-block;
   /*align-items: center;*/
   /*justify-content: center;*/
   width: 200px;
-  background-color: #FFD641;
+  /*background-color: #FFD641;*/
+ background-color: #673AB7;
+   
 }
 
-.example-header {
+.main-header {
   position: fixed;
   top: 0;
   left: 200px;
@@ -28,8 +30,24 @@
     width: 200px;
 }
 .copyright-text{
+  font-size: 12px;
     color: red;
 }
 .sidenav_button{
-  width: 200px;
+  margin: 5px 5px 5px 5px;
+  width: 190px;
+}
+
+.main-footer {
+  position: fixed;
+
+  bottom: 0;
+  left: 250px;
+  right: 0;
+}
+
+.footer_image{
+  margin-top: 10px;
+    height: 40px;
+    width: 160px;
 }

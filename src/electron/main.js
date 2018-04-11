@@ -26,15 +26,35 @@ function createWindow() {
 
   mainWindow.once("ready-to-show", () => { mainWindow.show() })
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+// Database Queries EVENTS
 
-  // ipcMain.on("mainWindowLoaded", function () {
-  //   // let result = knex.select("FirstName").from("Users")
-  //   // result.then(function (rows) {
-  //   //   mainWindow.webContents.send("resultSent", rows);
-  //   // })
-  // });
+  ipcMain.on("booksComponentLoaded", function () {
+    let result = knex.select().from("Books")
+    result.then(function (rows) {
+      mainWindow.webContents.send("resultSent", rows);
+    })
+  });
+
+  // Students Database Queries
+
+  ipcMain.on("studentsRead", function () {
+    knex.select().from("Students").then(function (students) {
+      mainWindow.webContents.send("studentsReadResult", students);
+    })
+  });
+
+  ipcMain.on("studentsCreate", function () {
+    
+  });
+  
+  ipcMain.on("studentsUpdate", function () {
+    
+  });
+  
+  ipcMain.on("studentsDelete", function () {
+    
+  });
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
