@@ -7,13 +7,13 @@ declare let electron: any;
   styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnInit {
-public ipc = electron.ipcRenderer;
+	public ipc = electron.ipcRenderer;
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
+	ngOnInit() {
 
 
-  }
+	}
 
 }

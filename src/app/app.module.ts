@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BooksComponent } from './books/books.component';
 import { StudentsComponent } from './students/students.component';
-import { StudentsService } from './services/students.service'
 
 const appRoutes: Routes = [
 	{path:'dashboard', component:DashboardComponent},
@@ -38,7 +37,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [StudentsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

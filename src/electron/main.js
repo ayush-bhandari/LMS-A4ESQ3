@@ -28,13 +28,6 @@ function createWindow() {
 
 // Database Queries EVENTS
 
-  ipcMain.on("booksComponentLoaded", function () {
-    let result = knex.select().from("Books")
-    result.then(function (rows) {
-      mainWindow.webContents.send("resultSent", rows);
-    })
-  });
-
   // Students Database Queries
 
   ipcMain.on("studentsRead", function () {
