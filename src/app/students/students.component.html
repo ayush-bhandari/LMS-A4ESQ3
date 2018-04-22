@@ -40,7 +40,7 @@
       	<mat-cell *matCellDef="let student">
        		<button mat-icon-button color="accent">
     			<mat-icon>mode_edit</mat-icon>
-  			</button>/<button mat-icon-button color="accent">
+  			</button>/<button mat-icon-button color="accent" (click)="deleteStudents(student)">
     			<mat-icon>delete_forever</mat-icon>
   			</button>
    		</mat-cell>

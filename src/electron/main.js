@@ -44,8 +44,13 @@ function createWindow() {
     
   });
   
-  ipcMain.on("studentsDelete", function () {
-    
+  ipcMain.on("studentsDelete", function (evt,student) {
+    knex("Students").where('member_id', student.member_id).del().then(()=>{
+      mainWindow.webContents.send("studentsDeleteResult");
+    })
+    // knex.select().from("Students").then(function (students) {
+    //   mainWindow.webContents.send("studentsDeleteResult", students);
+    // })
   });
 
 

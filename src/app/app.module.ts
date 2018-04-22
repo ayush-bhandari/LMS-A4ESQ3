@@ -2,12 +2,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { MatSidenavModule, MatToolbarModule, MatButtonModule, MatIconModule, MatTableModule, MatPaginatorModule, MatInputModule, MatFormFieldModule } from '@angular/material';
+import { 
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule, 
+    MatPaginatorModule, 
+    MatInputModule, 
+    MatFormFieldModule,
+    MatDialogModule 
+  } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BooksComponent } from './books/books.component';
-import { StudentsComponent } from './students/students.component';
+import { StudentsComponent, DeleteStudents } from './students/students.component';
 
 const appRoutes: Routes = [
 	{path:'dashboard', component:DashboardComponent},
@@ -22,7 +32,8 @@ const appRoutes: Routes = [
     AppComponent,
     DashboardComponent,
     BooksComponent,
-    StudentsComponent
+    StudentsComponent,
+    DeleteStudents
   ],
   imports: [
     BrowserModule,
@@ -35,7 +46,11 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
+  ],
+  entryComponents:[
+    DeleteStudents
   ],
   providers: [],
   bootstrap: [AppComponent]
