@@ -29,18 +29,13 @@ export class StudentsComponent implements OnInit {
 
   	ngOnInit() {
   		this.ipc.send("studentsRead");
-    	// this.ipc.on("studentsReadResult", this.StudentsRead.bind(this));
       this.ipc.on("studentsReadResult", (e,d) => {
         this.dataSource = d;
         this.zone.run(()=>this.tick());
       });
   	}
-  
-   //  StudentsRead(e,d){
-   //    this.dataSource= new MatTableDataSource(d);
-   //    // this.ref.detectChanges();
-  	// }
-  
+
+      
     ngAfterViewInit() {
     	this.dataSource.paginator = this.paginator;
   	}
@@ -56,6 +51,11 @@ export class StudentsComponent implements OnInit {
       width: '500px',
       data: { student: student }
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // this.zone.run(()=>this.tick());
+      this.ngOnInit();
+    });
   }
   
 }
@@ -69,14 +69,8 @@ export class DeleteStudents {
 
   constructor(
       public dialogRef: MatDialogRef<DeleteStudents>,
-      private zone: NgZone,
-      private ref: ChangeDetectorRef,
       @Inject(MAT_DIALOG_DATA) public data: any
     ) { }
-
-  tick() {
-    this.ref.detectChanges();
-  }
 
   public student = this.data.student;
   public ipc = electron.ipcRenderer;
@@ -86,11 +80,10 @@ export class DeleteStudents {
   }
 
   onYesClick(): void {
-    // console.log(this.student);
     this.ipc.send("studentsDelete",this.student);
     this.ipc.on("studentsDeleteResult", (e) => {
-        this.zone.run(()=>this.tick());
-        this.dialogRef.close();
-    })
+        
+    });
+    this.dialogRef.close();
   }
 }
