@@ -53,11 +53,20 @@ export class StudentsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      // this.zone.run(()=>this.tick());
       this.ngOnInit();
     });
   }
   
+  addNewStudent() : void {
+    let dialogRef = this.dialog.open(AddNewStudent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
 }
 
 
@@ -81,9 +90,32 @@ export class DeleteStudents {
 
   onYesClick(): void {
     this.ipc.send("studentsDelete",this.student);
-    this.ipc.on("studentsDeleteResult", (e) => {
-        
-    });
+    this.ipc.on("studentsDeleteResult", (e) => {});
+    this.dialogRef.close();
+  }
+}
+
+
+@Component({
+  selector: 'add-new-student',
+  templateUrl: './add-new-student.html'
+})
+export class AddNewStudent {
+
+  constructor(
+      public dialogRef: MatDialogRef<AddNewStudent>,
+      @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
+
+  public ipc = electron.ipcRenderer;
+
+  onCancel(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit(): void {
+    // this.ipc.send("studentsDelete",this.student);
+    // this.ipc.on("studentsDeleteResult", (e) => {});
     this.dialogRef.close();
   }
 }

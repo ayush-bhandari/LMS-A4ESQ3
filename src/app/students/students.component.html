@@ -1,7 +1,7 @@
 <div class="student-container mat-elevation-z8">
 
 	<div class="student-header">
-		<button mat-raised-button color="accent">ADD NEW STUDENT</button>
+		<button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
 	    <mat-form-field>
 	      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Seach...">
 	    </mat-form-field>

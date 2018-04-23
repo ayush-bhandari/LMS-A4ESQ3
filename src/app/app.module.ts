@@ -17,7 +17,7 @@ import {
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BooksComponent } from './books/books.component';
-import { StudentsComponent, DeleteStudents } from './students/students.component';
+import { StudentsComponent, DeleteStudents, AddNewStudent } from './students/students.component';
 
 const appRoutes: Routes = [
 	{path:'dashboard', component:DashboardComponent},
@@ -33,7 +33,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     BooksComponent,
     StudentsComponent,
-    DeleteStudents
+    DeleteStudents,
+    AddNewStudent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     MatDialogModule
   ],
   entryComponents:[
-    DeleteStudents
+    DeleteStudents,
+    AddNewStudent
   ],
   providers: [],
   bootstrap: [AppComponent]
