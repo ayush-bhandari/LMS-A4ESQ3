@@ -1,9 +1,9 @@
-<div class="student-container mat-elevation-z8">
+<div class="student-container">
 
 	<div class="student-header">
 		<button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
 	    <mat-form-field>
-	      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Seach...">
+	      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
 	    </mat-form-field>
 
     </div>
@@ -15,7 +15,7 @@
       <mat-cell *matCellDef="let student"> {{student.id}} </mat-cell>
     </ng-container>
 
-	<ng-container matColumnDef="member_id">
+	   <ng-container matColumnDef="member_id">
       <mat-header-cell *matHeaderCellDef> Member ID </mat-header-cell>
       <mat-cell *matCellDef="let student"> {{student.member_id}} </mat-cell>
     </ng-container>

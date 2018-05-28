@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Inject, NgZone } from '@angular/core';
-import { MatPaginator, MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { MatPaginator, MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
 
 declare let electron: any;
 
@@ -24,7 +25,9 @@ export class StudentsComponent implements OnInit {
       ) { }
 
     tick() {
-      this.ref.detectChanges();
+      // if(!this.ref['destroyed']){
+        this.ref.detectChanges();  
+      // }    
     }
 
   	ngOnInit() {
@@ -35,7 +38,10 @@ export class StudentsComponent implements OnInit {
       });
   	}
 
-      
+     // ngOnDestroy() {
+     //    this.ref.detach();
+     //  }
+
     ngAfterViewInit() {
     	this.dataSource.paginator = this.paginator;
   	}
@@ -95,6 +101,13 @@ export class DeleteStudents {
   }
 }
 
+export class StudentErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
 
 @Component({
   selector: 'add-new-student',
@@ -118,4 +131,40 @@ export class AddNewStudent {
     // this.ipc.on("studentsDeleteResult", (e) => {});
     this.dialogRef.close();
   }
+
+  studentFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
+  matcher = new StudentErrorStateMatcher();
+
 }
+
+
+
+// import {Component} from '@angular/core';
+
+// import {ErrorStateMatcher} from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+// export class MyErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     const isSubmitted = form && form.submitted;
+//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+//   }
+// }
+
+// /** @title Input with a custom ErrorStateMatcher */
+// @Component({
+//   selector: 'input-error-state-matcher-example',
+//   templateUrl: './input-error-state-matcher-example.html',
+//   styleUrls: ['./input-error-state-matcher-example.css'],
+// })
+// export class InputErrorStateMatcherExample {
+//   emailFormControl = new FormControl('', [
+//     Validators.required,
+//     Validators.email,
+//   ]);
+
+//   matcher = new MyErrorStateMatcher();
+// }

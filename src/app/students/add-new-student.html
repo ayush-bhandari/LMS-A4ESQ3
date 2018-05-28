@@ -1,6 +1,38 @@
 <h1 mat-dialog-title>Add New Student</h1>
 <div mat-dialog-content>
-	<!-- form here -->
+
+	  <!-- <mat-form-field>
+	    <input matInput placeholder="Member ID" [formControl]="studentFormControl"
+	           [errorStateMatcher]="matcher">
+	    <mat-error *ngIf="studentFormControl.hasError('required')">
+	      Member ID is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field>
+
+	  <mat-form-field>
+	    <input matInput placeholder="Name" [formControl]="studentFormControl"
+	           [errorStateMatcher]="matcher">
+	    <mat-error *ngIf="studentFormControl.hasError('required')">
+	      Name is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field>
+
+	  <mat-form-field>
+	    <input matInput placeholder="Class" [formControl]="studentFormControl"
+	           [errorStateMatcher]="matcher">
+	    <mat-error *ngIf="studentFormControl.hasError('required')">
+	      Class is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field>
+
+	  <mat-form-field>
+	    <input matInput placeholder="Roll No" [formControl]="studentFormControl"
+	           [errorStateMatcher]="matcher">
+	    <mat-error *ngIf="studentFormControl.hasError('required')">
+	      Roll No is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field> -->
+
 </div>
 <div mat-dialog-actions>
   <button mat-button cdkFocusInitial (click)="onCancel()">Cancel</button>
