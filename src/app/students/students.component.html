@@ -3,7 +3,7 @@
 	<div class="student-header">
 		<button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
 	    <mat-form-field>
-	      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+	      <mat-icon matPrefix style="font-size:14px;height: 14px;width: 14px;">search</mat-icon><input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
 	    </mat-form-field>
 
     </div>
@@ -52,8 +52,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-  <mat-paginator #paginator
-                 [pageSize]="10"
-                 [showFirstLastButtons]="true">
-  </mat-paginator>
+  <mat-paginator #paginator [pageSize]="10" [showFirstLastButtons]="true"></mat-paginator>
 </div>

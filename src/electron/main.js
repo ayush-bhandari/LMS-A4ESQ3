@@ -37,7 +37,23 @@ function createWindow() {
     })
   });
 
-  ipcMain.on("studentsCreate", function () {
+  ipcMain.on("studentsCreate", function (evt, student) {
+    knex('Students').where('member_id', student.member_id).then((studentResult)=>{
+      if (studentResult == null){
+        knex('Students').insert({
+          member_id: student.member_id,
+          student_name: student.student_name,
+          student_class: student.student_class,
+          student_rollno: student.student_rollno,
+          created_date: student.created_date,
+          modified_date: student.modified_date
+         }).then(()=>{
+          mainWindow.webContents.send("studentsCreateResult");
+        })
+      }else{
+        mainWindow.webContents.send("studentAlreadyExists");
+      }
+    })
     
   });
   
@@ -49,9 +65,6 @@ function createWindow() {
     knex("Students").where('member_id', student.member_id).del().then(()=>{
       mainWindow.webContents.send("studentsDeleteResult");
     })
-    // knex.select().from("Students").then(function (students) {
-    //   mainWindow.webContents.send("studentsDeleteResult", students);
-    // })
   });
 
 

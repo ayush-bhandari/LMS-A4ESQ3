@@ -12,12 +12,12 @@ declare let electron: any;
 export class StudentsComponent implements OnInit {
 	
     public ipc = electron.ipcRenderer;
-
+   
     displayedColumns = ['id','member_id', 'student_name', 'student_class', 'student_rollno','edit_delete'];
-    dataSource = new MatTableDataSource();
+    dataSource: MatTableDataSource<StudentData>;
 
-  	@ViewChild(MatPaginator) paginator: MatPaginator;
-
+  	@ViewChild(MatPaginator) public paginator: MatPaginator;
+   
   	constructor(
         public dialog: MatDialog,
         private zone: NgZone,
@@ -25,26 +25,28 @@ export class StudentsComponent implements OnInit {
       ) { }
 
     tick() {
-      // if(!this.ref['destroyed']){
+      if(!this.ref['destroyed']){
         this.ref.detectChanges();  
-      // }    
+      }    
+    }
+
+    paginatorCall (){
+      this.dataSource.paginator = this.paginator;
     }
 
   	ngOnInit() {
   		this.ipc.send("studentsRead");
       this.ipc.on("studentsReadResult", (e,d) => {
-        this.dataSource = d;
+        this.dataSource = new MatTableDataSource(d);
+        this.zone.run(()=>this.paginatorCall());
         this.zone.run(()=>this.tick());
       });
   	}
 
-     // ngOnDestroy() {
-     //    this.ref.detach();
-     //  }
-
-    ngAfterViewInit() {
-    	this.dataSource.paginator = this.paginator;
-  	}
+    // ngAfterViewInit() {
+    //   console.log(this.dataSource);
+    // 	this.dataSource.paginator = this.paginator;
+    // }
 	
 	applyFilter(filterValue: string) {
 	    filterValue = filterValue.trim(); // Remove whitespace
@@ -108,12 +110,24 @@ export class StudentErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+export class StudentsFormData {
+  constructor(
+    public member_id: string,
+    public student_name: string,
+    public student_class: string,
+    public student_rollno: string,
+    public created_date?: string,
+    public modified_date?: string
+  ) {}
+}
 
 @Component({
   selector: 'add-new-student',
   templateUrl: './add-new-student.html'
 })
 export class AddNewStudent {
+  
+  student = new StudentsFormData(null,null,null,null);
 
   constructor(
       public dialogRef: MatDialogRef<AddNewStudent>,
@@ -121,18 +135,30 @@ export class AddNewStudent {
     ) { }
 
   public ipc = electron.ipcRenderer;
-
+  
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  onSubmit(): void {
+  onSubmit(formm): void {
     // this.ipc.send("studentsDelete",this.student);
     // this.ipc.on("studentsDeleteResult", (e) => {});
+    console.log(formm);
+    // console.log(JSON.stringify(this.student));
+    // console.log(this.student);
     this.dialogRef.close();
   }
 
-  studentFormControl = new FormControl('', [
+  studentMemberIDFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  studentNameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  studentClassFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  studentRollNoFormControl = new FormControl('', [
     Validators.required
   ]);
 
@@ -140,7 +166,13 @@ export class AddNewStudent {
 
 }
 
-
+export interface StudentData {
+  id: string;
+  member_id: string;
+  student_name: string;
+  student_class: string;
+  student_rollno: string;
+}
 
 // import {Component} from '@angular/core';
 
