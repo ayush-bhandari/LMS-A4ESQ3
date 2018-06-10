@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Add New Student</h1>
+<!-- <h1 mat-dialog-title>Add New Student</h1>
 	<form #addNewStudentForm="ngForm" (ngSubmit)="onSubmit(addNewStudentForm)" novalidate>
  <div mat-dialog-content>
 
@@ -39,6 +39,53 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button cdkFocusInitial (click)="onCancel()">Cancel</button>
-  <!-- <button mat-button (click)="onSubmit(addNewStudentForm)" [disabled]="!addNewStudentForm.valid">Add</button> -->
+  <button mat-button (click)="onSubmit(addNewStudentForm)" [disabled]="!addNewStudentForm.valid">Add</button>
   <button mat-button type="submit" [disabled]="false">Add</button>
-</div></form>
+</div></form> -->
+
+
+
+<h1 mat-dialog-title>Add New Student</h1>
+	<form [formGroup]="addNewStudentForm">
+ <div mat-dialog-content>
+
+	
+	<mat-form-field>
+	    
+		<input matInput placeholder="Member ID" formControlName="member_id" required>
+
+	    <mat-error *ngIf="member_id.touched">
+	      Member ID is <strong>required</strong>
+	    </mat-error>
+
+	</mat-form-field>
+
+	<mat-form-field>
+	    <input matInput placeholder="Name" formControlName="student_name" required>
+	    <mat-error *ngIf="student_name.touched">
+	      Name is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field>
+
+	  <mat-form-field>
+	    <input matInput placeholder="Class" formControlName="student_class" required>
+	    <mat-error *ngIf="student_class.touched">
+	      Class is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field>
+
+	  <mat-form-field>
+	    <input matInput placeholder="Roll No" formControlName="student_rollno" required>
+	    <mat-error *ngIf="student_rollno.touched">
+	      Roll No is <strong>required</strong>
+	    </mat-error>
+	  </mat-form-field> 
+	
+
+	</div>
+	<div mat-dialog-actions>
+	  <button mat-button cdkFocusInitial (click)="onCancel()">Cancel</button>
+	  <button mat-button (click)="onSubmit()" [disabled]="addNewStudentForm.invalid">Add</button>
+	</div>
+</form>
+

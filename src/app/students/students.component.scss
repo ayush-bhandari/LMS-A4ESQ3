@@ -2,7 +2,17 @@
   display: flex;
   flex-direction: column;
 }
-
+.error-header{
+	display: flex;
+    flex-direction: row;
+}
+.error-message-header{
+	margin: 10px 10px 10px 10px;
+	font-size: 20px;
+}
+.error-header-spinner{
+	margin: 10px 10px 10px 10px;
+}
 .mat-table {
   overflow: auto;
 }

@@ -39,7 +39,7 @@ function createWindow() {
 
   ipcMain.on("studentsCreate", function (evt, student) {
     knex('Students').where('member_id', student.member_id).then((studentResult)=>{
-      if (studentResult == null){
+      if (studentResult.length === 0){
         knex('Students').insert({
           member_id: student.member_id,
           student_name: student.student_name,

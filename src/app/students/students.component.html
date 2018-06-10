@@ -1,9 +1,18 @@
 <div class="student-container">
 
 	<div class="student-header">
-		<button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
+		<div class="error-header">
+      <button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
+      <mat-progress-spinner
+        class="error-header-spinner"
+        [color]="'primary'"
+        [mode]="'indeterminate'" [diameter]="20">
+      </mat-progress-spinner>
+      <p class="error-message-header">This is future error message</p>
+
+    </div>
 	    <mat-form-field>
-	      <mat-icon matPrefix style="font-size:14px;height: 14px;width: 14px;">search</mat-icon><input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+	      <mat-icon matPrefix style="font-size:16px;height: 16px;width: 16px;">search</mat-icon><input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
 	    </mat-form-field>
 
     </div>

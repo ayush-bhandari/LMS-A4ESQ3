@@ -35,6 +35,7 @@
     "hammerjs": "^2.0.8",
     "knex": "^0.14.5",
     "material-design-icons": "^3.0.1",
+    "moment": "^2.22.2",
     "rxjs": "*",
     "sqlite3": "^4.0.0",
     "web-animations-js": "^2.3.1",

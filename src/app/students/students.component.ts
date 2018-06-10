@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Inject, NgZone } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
+import * as moment from 'moment';
 
 declare let electron: any;
 
@@ -103,66 +104,101 @@ export class DeleteStudents {
   }
 }
 
-export class StudentErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+// export class StudentErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     const isSubmitted = form && form.submitted;
+//     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+//   }
+// }
 
-export class StudentsFormData {
-  constructor(
-    public member_id: string,
-    public student_name: string,
-    public student_class: string,
-    public student_rollno: string,
-    public created_date?: string,
-    public modified_date?: string
-  ) {}
-}
+// export class StudentsFormData {
+//   constructor(
+//     public member_id: string,
+//     public student_name: string,
+//     public student_class: string,
+//     public student_rollno: string,
+//     public created_date?: string,
+//     public modified_date?: string
+//   ) {}
+// }
 
 @Component({
   selector: 'add-new-student',
   templateUrl: './add-new-student.html'
 })
-export class AddNewStudent {
+export class AddNewStudent implements OnInit{
   
-  student = new StudentsFormData(null,null,null,null);
+  // student = new StudentsFormData(null,null,null,null);
+  addNewStudentForm : FormGroup;
 
   constructor(
       public dialogRef: MatDialogRef<AddNewStudent>,
-      @Inject(MAT_DIALOG_DATA) public data: any
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private fb: FormBuilder,
     ) { }
 
   public ipc = electron.ipcRenderer;
   
+  ngOnInit() {
+    this.addNewStudentForm = this.fb.group({
+      member_id:['',[
+        Validators.required
+      ]],
+      student_name:['',[
+        Validators.required
+      ]],
+      student_class:['',[
+        Validators.required
+      ]],
+      student_rollno:['',[
+        Validators.required
+      ]],
+      created_date: moment().format(),
+      modified_date: moment().format()
+    })
+  }
+
+  get member_id() {
+    return this.addNewStudentForm.get('member_id');
+  }
+  get student_name() {
+    return this.addNewStudentForm.get('student_name');
+  }
+  get student_class() {
+    return this.addNewStudentForm.get('student_class');
+  }
+  get student_rollno() {
+    return this.addNewStudentForm.get('student_rollno');
+  }
+
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  onSubmit(formm): void {
-    // this.ipc.send("studentsDelete",this.student);
-    // this.ipc.on("studentsDeleteResult", (e) => {});
-    console.log(formm);
+  onSubmit(): void {
+    this.ipc.send("studentsCreate",this.addNewStudentForm.value);
+    
+    this.ipc.on("studentsCreateResult", (e) => {this.dialogRef.close();});
+    // console.log(this.addNewStudentForm.value);
     // console.log(JSON.stringify(this.student));
     // console.log(this.student);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
-  studentMemberIDFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  studentNameFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  studentClassFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  studentRollNoFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  // studentMemberIDFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
+  // studentNameFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
+  // studentClassFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
+  // studentRollNoFormControl = new FormControl('', [
+  //   Validators.required
+  // ]);
 
-  matcher = new StudentErrorStateMatcher();
+  // matcher = new StudentErrorStateMatcher();
 
 }
 
