@@ -13,12 +13,12 @@ declare let electron: any;
 export class StudentsComponent implements OnInit {
 	
     public ipc = electron.ipcRenderer;
-   
+    // public studentAlreadyExistsError = true;
     displayedColumns = ['id','member_id', 'student_name', 'student_class', 'student_rollno','edit_delete'];
     dataSource: MatTableDataSource<StudentData>;
 
   	@ViewChild(MatPaginator) public paginator: MatPaginator;
-   
+    
   	constructor(
         public dialog: MatDialog,
         private zone: NgZone,
@@ -42,6 +42,15 @@ export class StudentsComponent implements OnInit {
         this.zone.run(()=>this.paginatorCall());
         this.zone.run(()=>this.tick());
       });
+      // this.zone.run(()=>{
+      //   this.studentAlreadyExistsError = true;
+      //   this.ipc.on("studentAlreadyExists", (e) => {
+      //     console.log(this.studentAlreadyExistsError);
+      //     this.studentAlreadyExistsError = false;
+      //     console.log(this.studentAlreadyExistsError);
+      //     setTimeout(function(){ this.studentAlreadyExistsError=true;console.log(this.studentAlreadyExistsError);}, 5000);
+      //   });
+      // })
   	}
 
     // ngAfterViewInit() {
@@ -56,6 +65,7 @@ export class StudentsComponent implements OnInit {
 	}
 
   deleteStudents(student) : void {
+    // let loading = false;
     let dialogRef = this.dialog.open(DeleteStudents, {
       width: '500px',
       data: { student: student }
@@ -87,19 +97,30 @@ export class DeleteStudents {
 
   constructor(
       public dialogRef: MatDialogRef<DeleteStudents>,
-      @Inject(MAT_DIALOG_DATA) public data: any
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private zone: NgZone
     ) { }
 
   public student = this.data.student;
   public ipc = electron.ipcRenderer;
-
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onYesClick(): void {
-    this.ipc.send("studentsDelete",this.student);
-    this.ipc.on("studentsDeleteResult", (e) => {});
+    // console.log(this.loading);
+    // this.loading = true;
+    // console.log(this.loading);
+    this.zone.run(()=>{
+      this.ipc.send("studentsDelete",this.student);
+      this.ipc.on("studentsDeleteResult", (e) => {
+        // setTimeout(function(){ this.loading=false; console.log(this.loading);}, 5000);
+        // console.log(this.loading);
+        // this.dialogRef.close();
+      });
+    });
+    
     this.dialogRef.close();
   }
 }
@@ -135,6 +156,7 @@ export class AddNewStudent implements OnInit{
       public dialogRef: MatDialogRef<AddNewStudent>,
       @Inject(MAT_DIALOG_DATA) public data: any,
       private fb: FormBuilder,
+      private zone: NgZone
     ) { }
 
   public ipc = electron.ipcRenderer;
@@ -176,13 +198,34 @@ export class AddNewStudent implements OnInit{
   }
 
   onSubmit(): void {
+   this.zone.run(()=>{
     this.ipc.send("studentsCreate",this.addNewStudentForm.value);
     
-    this.ipc.on("studentsCreateResult", (e) => {this.dialogRef.close();});
+    this.ipc.on("studentsCreateResult", (e) => { 
+      // this.dialogRef.close(); 
+    });
+    
+    this.ipc.on("studentAlreadyExists", (e) => {
+      // <p class="error-message-header">
+      //   <span [(hidden)]="studentAlreadyExistsError">Oops, Looks like A student with same <strong>MEMBER ID</strong> Already exists. Please create again with different and unique <strong>MEMBER ID</strong></span>
+      // </p>
+      // console.log("studentAlreadyExistsError");
+      // this.dialogRef.close();
+      alert("Oops, Looks like A student with this MEMBER ID Already exists.\nPlease create again with different and unique MEMBER ID");
+      // this.dialogRef.close();
+      // if (confirm("Oops, Student already exists.\nPlease create again with different and unique MEMBER ID")) {
+      //   this.dialog.open(AddNewStudent, {
+      //      width: '500px'
+      //    });
+      // } else {
+      //   this.dialogRef.close();
+      // }
+    });
     // console.log(this.addNewStudentForm.value);
     // console.log(JSON.stringify(this.student));
     // console.log(this.student);
-    // this.dialogRef.close();
+  });
+    this.dialogRef.close();
   }
 
   // studentMemberIDFormControl = new FormControl('', [
