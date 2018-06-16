@@ -19,7 +19,13 @@ import {
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BooksComponent } from './books/books.component';
+import { 
+  BooksComponent,
+  DeleteBook, 
+  AddNewBook, 
+  EditBook 
+} from './books/books.component';
+
 import { 
   StudentsComponent,
   DeleteStudents, 
@@ -40,6 +46,9 @@ const appRoutes: Routes = [
     AppComponent,
     DashboardComponent,
     BooksComponent,
+    DeleteBook, 
+    AddNewBook, 
+    EditBook,
     StudentsComponent,
     DeleteStudents,
     AddNewStudent,
@@ -62,6 +71,9 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule
   ],
   entryComponents:[
+    DeleteBook, 
+    AddNewBook, 
+    EditBook,
     DeleteStudents,
     AddNewStudent,
     EditStudent

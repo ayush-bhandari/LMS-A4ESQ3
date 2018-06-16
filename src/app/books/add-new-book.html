@@ -1,0 +1,87 @@
+<h1 mat-dialog-title>Add New Book</h1>
+<form [formGroup]="addNewBookForm">
+<div mat-dialog-content>
+
+	<mat-form-field>
+		<input matInput placeholder="Book ID" formControlName="book_id" required>
+	    <mat-error *ngIf="book_id.touched">
+	      Book ID is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Title" formControlName="book_title" required>
+	    <mat-error *ngIf="book_title.touched">
+	      Book Title is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+	
+	<mat-form-field>
+		<input matInput placeholder="Book Author" formControlName="book_author" required>
+	    <mat-error *ngIf="book_author.touched">
+	      Book Author is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book ISBN" formControlName="book_isbn" required>
+	    <mat-error *ngIf="book_isbn.touched">
+	      Book ISBN is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Category" formControlName="book_category" required>
+	    <mat-error *ngIf="book_category.touched">
+	      Book Category is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Language" formControlName="book_language" required>
+	    <mat-error *ngIf="book_language.touched">
+	      Book Language is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Publisher" formControlName="book_publisher" required>
+	    <mat-error *ngIf="book_publisher.touched">
+	      Book Publisher is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Year" formControlName="book_year" required>
+	    <mat-error *ngIf="book_year.touched">
+	      Book Year is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Price" formControlName="book_price" required>
+	    <mat-error *ngIf="book_price.touched">
+	      Book Price is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Pages" formControlName="book_pages" required>
+	    <mat-error *ngIf="book_pages.touched">
+	      Book Pages is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<input matInput placeholder="Book Shelf" formControlName="book_shelf" required>
+	    <mat-error *ngIf="book_shelf.touched">
+	      Book Shelf is <strong>required</strong>
+	    </mat-error>
+	</mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+	<button mat-button cdkFocusInitial (click)="onCancel()">Cancel</button>
+	<button mat-button (click)="onSubmit()" [disabled]="addNewBookForm.invalid">Add</button>
+</div>
+</form>

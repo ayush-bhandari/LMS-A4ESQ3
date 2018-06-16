@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Are you sure you want to delete <strong style="color:red;">{{this.book.book_title}}</strong> ?</h1>
+<div mat-dialog-content>
+  <p><strong>Book ID:</strong> {{this.book.book_id}}</p>
+  <p><strong>Book Author:</strong> {{this.book.book_author}}</p>
+  <p><strong>Book ISBN:</strong> {{this.book.book_isbn}}</p>
+  <p><strong>Book Category:</strong> {{this.book.book_category}}</p>
+  <p><strong>Book Language:</strong> {{this.book.book_language}}</p>
+  <p><strong>Book Publisher:</strong> {{this.book.book_publisher}}</p>
+  <p><strong>Book Year:</strong> {{this.book.book_year}}</p>
+  <p><strong>Book Price:</strong> {{this.book.book_price}}</p>
+  <p><strong>Book Pages:</strong> {{this.book.book_pages}}</p>
+  <p><strong>Book Shelf:</strong> {{this.book.book_shelf}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button cdkFocusInitial (click)="onNoClick()">No</button>
+  <button mat-button (click)="onYesClick()">Yes</button>
+</div>

@@ -1,0 +1,16 @@
+.books-container {
+  display: flex;
+  flex-direction: column;
+}
+.mat-table {
+  overflow: auto;
+}
+
+.books-header {
+	padding: 20px 20px 20px 20px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}

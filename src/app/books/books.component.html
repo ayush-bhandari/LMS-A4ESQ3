@@ -1,3 +1,58 @@
-<p>
-  books works!
-</p>
+<div class="books-container">
+
+	<div class="books-header">
+     <button mat-raised-button color="accent" (click)="addNewBook()">ADD NEW BOOK</button>
+
+	    <mat-form-field>
+	      <mat-icon matPrefix style="font-size:16px;height: 16px;width: 16px;">search</mat-icon><input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+	    </mat-form-field>
+
+    </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.id}} </mat-cell>
+    </ng-container>
+
+	<ng-container matColumnDef="book_id">
+      <mat-header-cell *matHeaderCellDef> Book ID </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.book_id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="book_title">
+      <mat-header-cell *matHeaderCellDef> Book Title </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.book_title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="book_author">
+      <mat-header-cell *matHeaderCellDef> Book Author </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.book_author}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="book_shelf">
+      <mat-header-cell *matHeaderCellDef> Book Shelf </mat-header-cell>
+      <mat-cell *matCellDef="let book"> {{book.book_shelf}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="edit_delete">
+      	<mat-header-cell *matHeaderCellDef> Edit / Delete </mat-header-cell>
+      	<mat-cell *matCellDef="let book">
+       		<button mat-icon-button color="accent" (click)="editBook(book)">
+    			<mat-icon>mode_edit</mat-icon>
+  			</button>/<button mat-icon-button color="accent" (click)="deleteBook(book)">
+    			<mat-icon>delete_forever</mat-icon>
+  			</button>
+   		</mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [pageSize]="10" [showFirstLastButtons]="true"></mat-paginator>
+</div>

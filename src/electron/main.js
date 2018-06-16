@@ -74,6 +74,65 @@ function createWindow() {
     })
   });
 
+    // Books Database Queries
+
+  ipcMain.on("booksRead", function () {
+    knex.select().from("Books").then(function (books) {
+      mainWindow.webContents.send("booksReadResult", books);
+    })
+  });
+
+  ipcMain.on("bookCreate", function (evt, book) {
+    knex('Books').where('book_id', book.book_id).then((bookResult)=>{
+      if (bookResult.length === 0){
+        knex('Books').insert({
+          book_id: book.book_id,
+          book_title: book.book_title,
+          book_author: book.book_author,
+          book_isbn: book.book_isbn,
+          book_category: book.book_category,
+          book_language: book.book_language,
+          book_publisher: book.book_publisher,
+          book_year: book.book_year,
+          book_price: book.book_price,
+          book_pages: book.book_pages,
+          book_shelf: book.book_shelf,
+          created_date: book.created_date,
+          modified_date: book.modified_date
+         }).then(()=>{
+          mainWindow.webContents.send("bookCreateResult");
+        })
+      }else{
+        mainWindow.webContents.send("bookAlreadyExists");
+      }
+    })
+    
+  });
+  
+  ipcMain.on("bookEdit", function (evt, book) {
+    knex('Books').where('book_id', book.book_id).update({
+      book_title: book.book_title,
+      book_author: book.book_author,
+      book_isbn: book.book_isbn,
+      book_category: book.book_category,
+      book_language: book.book_language,
+      book_publisher: book.book_publisher,
+      book_year: book.book_year,
+      book_price: book.book_price,
+      book_pages: book.book_pages,
+      book_shelf: book.book_shelf,
+      modified_date: book.modified_date
+    }).then(()=>{
+      mainWindow.webContents.send("bookEditResult");
+    })
+  });
+  
+  ipcMain.on("bookDelete", function (evt,book) {
+    knex("Books").where('book_id', book.book_id).del().then(()=>{
+      mainWindow.webContents.send("bookDeleteResult");
+    })
+  });
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {

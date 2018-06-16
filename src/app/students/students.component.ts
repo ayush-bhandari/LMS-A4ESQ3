@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, Inject, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatPaginator, MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA, ErrorStateMatcher } from '@angular/material';
+import { 
+  MatPaginator,
+  MatTableDataSource,
+  MatDialog, 
+  MatDialogRef, 
+  MAT_DIALOG_DATA 
+} from '@angular/material';
 import * as moment from 'moment';
 
 declare let electron: any;
