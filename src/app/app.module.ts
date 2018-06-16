@@ -20,7 +20,12 @@ import {
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BooksComponent } from './books/books.component';
-import { StudentsComponent, DeleteStudents, AddNewStudent } from './students/students.component';
+import { 
+  StudentsComponent,
+  DeleteStudents, 
+  AddNewStudent, 
+  EditStudent 
+} from './students/students.component';
 
 const appRoutes: Routes = [
 	{path:'dashboard', component:DashboardComponent},
@@ -37,7 +42,8 @@ const appRoutes: Routes = [
     BooksComponent,
     StudentsComponent,
     DeleteStudents,
-    AddNewStudent
+    AddNewStudent,
+    EditStudent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,8 @@ const appRoutes: Routes = [
   ],
   entryComponents:[
     DeleteStudents,
-    AddNewStudent
+    AddNewStudent,
+    EditStudent
   ],
   providers: [],
   bootstrap: [AppComponent]

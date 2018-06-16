@@ -57,8 +57,15 @@ function createWindow() {
     
   });
   
-  ipcMain.on("studentsUpdate", function () {
-    
+  ipcMain.on("studentEdit", function (evt, student) {
+    knex('Students').where('member_id', student.member_id).update({
+      student_name: student.student_name,
+      student_class: student.student_class,
+      student_rollno: student.student_rollno,
+      modified_date: student.modified_date
+    }).then(()=>{
+      mainWindow.webContents.send("studentEditResult");
+    })
   });
   
   ipcMain.on("studentsDelete", function (evt,student) {

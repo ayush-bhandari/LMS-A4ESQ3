@@ -1,18 +1,8 @@
 <div class="student-container">
 
 	<div class="student-header">
-		<div class="error-header">
-      <button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
-      <!-- <mat-progress-spinner *ngIf="true"
-        class="error-header-spinner"
-        [color]="'primary'"
-        [mode]="'indeterminate'" [diameter]="20">
-      </mat-progress-spinner> -->
-      <!-- <p class="error-message-header">
-        <span [(hidden)]="studentAlreadyExistsError">Oops, Looks like A student with same <strong>MEMBER ID</strong> Already exists. Please create again with different and unique <strong>MEMBER ID</strong></span>
-      </p> -->
+     <button mat-raised-button color="accent" (click)="addNewStudent()">ADD NEW STUDENT</button>
 
-    </div>
 	    <mat-form-field>
 	      <mat-icon matPrefix style="font-size:16px;height: 16px;width: 16px;">search</mat-icon><input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
 	    </mat-form-field>
@@ -49,7 +39,7 @@
     <ng-container matColumnDef="edit_delete">
       	<mat-header-cell *matHeaderCellDef> Edit / Delete </mat-header-cell>
       	<mat-cell *matCellDef="let student">
-       		<button mat-icon-button color="accent">
+       		<button mat-icon-button color="accent" (click)="editStudent(student)">
     			<mat-icon>mode_edit</mat-icon>
   			</button>/<button mat-icon-button color="accent" (click)="deleteStudents(student)">
     			<mat-icon>delete_forever</mat-icon>
